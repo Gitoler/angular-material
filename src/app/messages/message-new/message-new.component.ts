@@ -1,4 +1,6 @@
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-message-new',
@@ -6,10 +8,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./message-new.component.css']
 })
 export class MessageNewComponent implements OnInit {
+  firstFormGroup!: FormGroup;
+  secondFormGroup!: FormGroup;
+  priorities:string[] = [ "High", "Medium", "Low"];
+  departments: object[] = [
+    {
+      id: 1,
+      name: "Complants"
+    },
+    {
+      id: 2,
+      name: "Loyalty"
+    },
+    {
+      id: 3,
+      name: "Promotions"
+    }
+  ]
 
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor(private formBuilder:FormBuilder) { }
+
+  ngOnInit() :void {
+    this.firstFormGroup = this.formBuilder.group({
+      emailCtrl: ['', Validators.required],
+      priorityCtrl: ['', Validators.required],
+      departmentCtrl: ['', Validators.required],
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      messageCtrl: ['', Validators.required]
+    });
   }
 
 }
