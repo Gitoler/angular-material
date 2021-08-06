@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { RepDialogComponent } from '../rep-dialog/rep-dialog.component';
+import { MatSnackBar  } from '@angular/material/snack-bar';
+import {ErrorStateMatcher} from '@angular/material/core';
 
 @Component({
   selector: 'app-customer-new',
@@ -6,10 +11,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customer-new.component.css']
 })
 export class CustomerNewComponent implements OnInit {
+  emailFormControl!: FormControl;
+  matcher = new ErrorStateMatcher();
+  constructor(public dialog:MatDialog, public snackbar:MatSnackBar) { }
 
-  constructor() { }
+  ngOnInit() {
+    this.emailFormControl = new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]);
+  }
 
-  ngOnInit(): void {
+  openUndoSnackBar() {
+    const snackbarRef = this.snackbar.open('Customer saved', 'UNDO', {
+      horizontalPosition:'end'
+    });
+
+    snackbarRef.onAction().subscribe(() => {
+      alert('Undo that save!');
+    });
+  }
+
+  openRepDialog() {
+    const dialogRef = this.dialog.open(RepDialogComponent, {
+      width:'250px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      alert(`User chose ${result}`);
+    });
   }
 
 }

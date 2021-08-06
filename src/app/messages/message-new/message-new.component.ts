@@ -1,4 +1,3 @@
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -11,20 +10,7 @@ export class MessageNewComponent implements OnInit {
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   priorities:string[] = [ "High", "Medium", "Low"];
-  departments: object[] = [
-    {
-      id: 1,
-      name: "Complants"
-    },
-    {
-      id: 2,
-      name: "Loyalty"
-    },
-    {
-      id: 3,
-      name: "Promotions"
-    }
-  ]
+  departments: string[] = [ "Complants","Loyalty","Promotions"];
 
 
   constructor(private formBuilder:FormBuilder) { }
