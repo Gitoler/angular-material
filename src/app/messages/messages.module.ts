@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { MessagesRoutingModule } from './messages-routing.module';
 import { MessageListComponent } from './message-list/message-list.component';
+import { MessageNewComponent } from './message-new/message-new.component';
 
 
 @NgModule({
   declarations: [
-    MessageListComponent
+    MessageListComponent,
+    MessageNewComponent
   ],
   imports: [
     CommonModule,
